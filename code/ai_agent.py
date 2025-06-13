@@ -24,18 +24,18 @@ from langchain_core.messages.ai import AIMessage
 
 system_prompt="Act as an AI chatbot which is smart"
 
-agent=create_react_agent(
-    model=groq_llm,
-    tools=[search_tool],
-    prompt=system_prompt  # This is for the agent role like analyst, stock broker
-)
+# agent=create_react_agent(
+#     model=groq_llm,
+#     tools=[search_tool],
+#     prompt=system_prompt  # This is for the agent role like analyst, stock broker
+# )
 
-query="Tell me about the trends in crypto markets"
-state={"messages": query}
-response=agent.invoke(state)
-messages=response.get("messages")
-ai_message=[message.content for message in messages if isinstance(message, AIMessage)] 
-print(ai_message[-1])
+# query="Tell me about the trends in crypto markets"
+# state={"messages": query}
+# response=agent.invoke(state)
+# messages=response.get("messages")
+# ai_message=[message.content for message in messages if isinstance(message, AIMessage)] 
+# print(ai_message[-1])
 
 # Given answer:
 """
@@ -49,3 +49,24 @@ print(ai_message[-1])
     cryptocurrencies with their current prices, percentage changes, volume, open interest, and 
     daily charts.
 """
+
+
+def get_response_from_ai_agent(llm_id, query, allow_search, system_prompt, provider):
+    if provider=="Groq":    
+        llm=ChatGroq(model=llm_id)
+    elif provider=="OpenAI":
+        llm=ChatOpenAI(model=llm_id)
+
+    tools = [TavilySearch(max_results=2)] if allow_search else []
+
+    agent=create_react_agent(
+    model=llm,
+    tools=tools,
+    prompt=system_prompt  # This is for the agent role like analyst, stock broker
+)
+
+    state={"messages": query}
+    response=agent.invoke(state)
+    messages=response.get("messages")
+    ai_message=[message.content for message in messages if isinstance(message, AIMessage)] 
+    return ai_message[-1]
