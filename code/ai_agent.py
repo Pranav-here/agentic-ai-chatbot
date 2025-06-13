@@ -1,5 +1,8 @@
 # Step 1: setup API keys for Groq and Tavily and OpenAI
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY")
@@ -16,10 +19,11 @@ groq_llm=ChatGroq(model='llama-3.3-70b-versatile')
 search_tool = TavilySearch(max_results=2)
 
 # Step 3: Setup AI Agent with search tool functionality 
+from langgraph.prebuilt import create_react_agent
+from langchain_core.messages.ai import AIMessage
 
 system_prompt="Act as an AI chatbot which is smart"
 
-from langgraph.prebuilt import create_react_agent
 agent=create_react_agent(
     model=groq_llm,
     tools=[search_tool],
@@ -29,4 +33,19 @@ agent=create_react_agent(
 query="Tell me about the trends in crypto markets"
 state={"messages": query}
 response=agent.invoke(state)
-print(response)
+messages=response.get("messages")
+ai_message=[message.content for message in messages if isinstance(message, AIMessage)] 
+print(ai_message[-1])
+
+# Given answer:
+"""
+    Based on the search results, the current trends in crypto markets are not explicitly stated. 
+    However, the search results provide links to websites that offer real-time prices, changes, 
+    trading volume, and daily charts for various cryptocurrencies. These resources can be used to 
+    stay up-to-date with the latest developments in the crypto market.
+
+    To get a better understanding of the current trends, you can visit the websites provided in 
+    the search results, such as Yahoo Finance's crypto page, which offers a comprehensive list of 
+    cryptocurrencies with their current prices, percentage changes, volume, open interest, and 
+    daily charts.
+"""
