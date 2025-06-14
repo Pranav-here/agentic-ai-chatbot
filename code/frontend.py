@@ -1,9 +1,10 @@
 # Step 1: Setup Streamlit UI (model provider, model, system prompt, online search, query)
+# Run backend before running streamlit run code/frontend.py
 
 import streamlit as st
 
 # Configure Streamlit page
-st.set_page_config(page_title="LangGraph Agent UI", layout="wide")
+st.set_page_config(page_title="LangGraph Agent UI", layout="centered")
 st.title("Personal AI Chatbot Agent")
 st.write("Create and Interact with the AI Agents!")
 

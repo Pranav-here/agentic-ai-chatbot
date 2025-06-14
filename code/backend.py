@@ -1,4 +1,5 @@
 # Step 1: Setup Pydantic Model(Schema Validation)
+# Run backend before running streamlit run code/frontend.py
 
 from pydantic import BaseModel
 from typing import List
