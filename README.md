@@ -25,16 +25,15 @@ The system consists of:
 
 ## Project Structure
 
-project-root/
-│
-├── main.py                # FastAPI Backend
-├── frontend.py            # Streamlit Frontend
-├── ai_agent.py            # Agent Creation Logic
-├── backend.py             # Pydantic Schema Validation
-├── .env                   # Environment variables for API Keys
-├── requirements.txt
-└── README.md
-
+| File/Folder      | Description                  |
+|-------------------|------------------------------|
+| `main.py`         | FastAPI Backend              |
+| `frontend.py`     | Streamlit Frontend           |
+| `ai_agent.py`     | Agent Creation Logic         |
+| `backend.py`      | Pydantic Schema Validation   |
+| `.env`            | Environment variables (API Keys) |
+| `requirements.txt`| Python dependencies list     |
+| `README.md`       | Project documentation        |
 ## Setup Instructions
 
 1. **Clone the repository**
