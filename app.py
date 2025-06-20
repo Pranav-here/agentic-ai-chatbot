@@ -1,8 +1,8 @@
 # STEP 1: Load environment variables and retrieve API keys
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()  # reads .env file in the project root
+# load_dotenv()  # reads .env file in the project root
 
 GROQ_API_KEY  = os.getenv("GROQ_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
