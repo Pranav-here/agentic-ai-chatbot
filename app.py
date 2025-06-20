@@ -85,8 +85,8 @@ with col2:
         "Model",
         (
             "gpt-4o-mini",
-            "gpt-4",
-            "gpt-3.5-turbo"
+            "gpt-4.1",
+            "o4-mini"
         ) if provider == "OpenAI" else (
             "gemma2-9b-it",
             "llama-3.3-70b-versatile",
